@@ -14,7 +14,7 @@ const Detail = () => {
     const fetchData = async () => {
       try {
         const res = await api.get(`/posts/${id}`);
-        setPost(res.data);
+        setPost(res.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -37,9 +37,10 @@ const Detail = () => {
           <h1 className="text-4xl font-medium mb-8 text-zinc-800 dark:text-zinc-100">
             {post.title}
           </h1>
-          <div className="text-zinc-600 dark:text-zinc-400 text-base space-y-4">
-            <p>{post.body}</p>
-          </div>
+          <div
+            className="text-zinc-600 dark:text-zinc-400 text-base space-y-6"
+            dangerouslySetInnerHTML={{ __html: post.body }}
+          ></div>
         </div>
       ) : (
         <div className="flex justify-center items-center h-40">
