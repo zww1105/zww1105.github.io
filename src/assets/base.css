@@ -1,0 +1,10 @@
+:root {
+  --x-body-bg: #f3f5f8;
+  --x-body-color: rgb(55 65 81);
+
+  /*Font Color*/
+  --x-font-color-first: #303133;
+  --x-font-color-second: #606266;
+  --x-font-color-third: #909399;
+  --x-font-color-fourth: #c0c4cc;
+}
