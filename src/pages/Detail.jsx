@@ -27,7 +27,7 @@ const Detail = () => {
     <div className="max-w-screen-md m-auto relative">
       <Button
         variant="ghost"
-        className="absolute top-0 -left-32"
+        className="absolute -top-12 left-0 sm:top-0 sm:-left-32"
         onClick={() => navigate(-1)}
       >
         <ArrowLeft />

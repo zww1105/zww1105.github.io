@@ -61,6 +61,15 @@ const AppContent = () => {
           </Routes>
         </div>
       </div>
+      <div className="absolute bottom-0 right-0 mb-4 mr-4">
+        <a href="https://buttercms.com">
+          <img
+            width={120}
+            src="https://cdn.buttercms.com/PGJPyIwaQ2KnOA8UyKfH"
+            alt=""
+          />
+        </a>
+      </div>
     </div>
   );
 };
