@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../api/request";
 import { Loader } from "lucide-react";
+import PostContent from "@/components/PostContent";
 
 const About = () => {
   const [post, setPost] = useState({});
@@ -21,15 +22,7 @@ const About = () => {
   return (
     <div className="max-w-screen-md m-auto relative">
       {post.title ? (
-        <div>
-          <h1 className="text-4xl font-medium mb-8 text-zinc-800 dark:text-zinc-100">
-            {post.title}
-          </h1>
-          <div
-            className="text-zinc-600 dark:text-zinc-400 text-base space-y-6"
-            dangerouslySetInnerHTML={{ __html: post.body }}
-          ></div>
-        </div>
+        <PostContent post={post} />
       ) : (
         <div className="flex justify-center items-center h-40">
           <Loader className="animate-spin w-12 h-12 text-zinc-600 dark:text-zinc-400" />

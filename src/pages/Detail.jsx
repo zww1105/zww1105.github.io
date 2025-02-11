@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Loader } from "lucide-react";
+import PostContent from "@/components/PostContent";
 
 const Detail = () => {
   const navigate = useNavigate();
@@ -35,19 +36,7 @@ const Detail = () => {
       </Button>
 
       {post.title ? (
-        <div>
-          <div className="text-zinc-400 text-sm mb-6 flex items-center">
-            <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500 mr-3"></span>
-            {new Date(post.updated).toLocaleString()}
-          </div>
-          <h1 className="text-4xl font-medium mb-8 text-zinc-800 dark:text-zinc-100">
-            {post.title}
-          </h1>
-          <div
-            className="text-zinc-600 dark:text-zinc-400 text-base space-y-6"
-            dangerouslySetInnerHTML={{ __html: post.body }}
-          ></div>
-        </div>
+        <PostContent post={post} />
       ) : (
         <div className="flex justify-center items-center h-40">
           <Loader className="animate-spin w-12 h-12 text-zinc-600 dark:text-zinc-400" />

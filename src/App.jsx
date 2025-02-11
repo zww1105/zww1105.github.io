@@ -12,31 +12,31 @@ import { Switch } from "@/components/ui/switch";
 const AppContent = () => {
   const { theme, toggleTheme } = useAppContext();
 
+  const routes = [
+    { path: "/", name: "Home" },
+    { path: "/about", name: "About" },
+  ];
+
   return (
     <div className="bg-zinc-50 dark:bg-zinc-950 font-extralight">
       <div className="p-4 max-w-screen-xl bg-background text-foreground m-auto min-h-screen dark:bg-zinc-900 ring-1 ring-zinc-100 dark:ring-zinc-300/20">
         <div className="max-w-screen-lg m-auto pb-20">
-          <nav className="rounded-lg mb-24 flex gap-2 items-center">
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                `text-sm font-medium text-muted-foreground transition-colors hover:text-primary ${
-                  isActive ? "text-primary" : ""
-                }`
-              }
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                `text-sm font-medium text-muted-foreground transition-colors hover:text-primary ${
-                  isActive ? "text-primary" : ""
-                }`
-              }
-            >
-              About
-            </NavLink>
+          <header className="flex mb-24">
+            <nav className="rounded-lg flex gap-4 items-center flex-1">
+              {routes.map((i) => (
+                <NavLink
+                  key={i.path}
+                  to={i.path}
+                  className={({ isActive }) =>
+                    `text-sm px-4 py-1 rounded-full font-medium text-muted-foreground transition-colors hover:text-primary ${
+                      isActive ? "text-primary bg-muted" : ""
+                    }`
+                  }
+                >
+                  {i.name}
+                </NavLink>
+              ))}
+            </nav>
             <div className="form-control ml-auto">
               <div className="flex items-center space-x-2">
                 <Switch
@@ -47,7 +47,7 @@ const AppContent = () => {
                 <Label htmlFor="dark-mode">Dark</Label>
               </div>
             </div>
-          </nav>
+          </header>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
