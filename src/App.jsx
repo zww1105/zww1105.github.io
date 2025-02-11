@@ -19,9 +19,9 @@ const AppContent = () => {
 
   return (
     <div className="bg-zinc-50 dark:bg-zinc-950 font-extralight">
-      <div className="p-4 max-w-screen-xl bg-background text-foreground m-auto min-h-screen dark:bg-zinc-900">
-        <div className="max-w-screen-lg m-auto">
-          <nav className="rounded-lg mb-32 flex gap-2 items-center">
+      <div className="p-4 max-w-screen-xl bg-background text-foreground m-auto min-h-screen dark:bg-zinc-900 ring-1 ring-zinc-100 dark:ring-zinc-300/20">
+        <div className="max-w-screen-lg m-auto pb-20">
+          <nav className="rounded-lg mb-24 flex gap-2 items-center">
             <NavLink
               to="/"
               className={({ isActive }) =>

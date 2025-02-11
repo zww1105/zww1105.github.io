@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import api from "../api/request";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -6,46 +6,69 @@ import { ChevronRight, Loader } from "lucide-react";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [data, setData] = useState(null);
-  const [page, setPage] = useState(1); // 追踪当前页数
+  const [data, setData] = useState([]); // 直接初始化为空数组
+  const [page, setPage] = useState(1); // 当前页数
   const [loading, setLoading] = useState(false); // 控制加载状态
-  const [hasMore, setHasMore] = useState(true);
-  const isFetching = useRef(false); // 用于避免重复请求
+  const [hasMore, setHasMore] = useState(true); // 控制是否有更多数据
+  const [slogan, setSlogan] = useState(null); // slogan 状态改为 null 以便更好的检查
+
+  const isFetching = useRef(false); // 避免重复请求
   const postsLimit = 10;
 
+  // 使用 useCallback 包裹 fetchData
+  const fetchData = useCallback(async () => {
+    if (isFetching.current || !hasMore) return; // 防止重复请求
+    setLoading(true); // 设置加载状态
+    isFetching.current = true;
+
+    try {
+      // 并行请求 posts 和 slogan 数据
+      const [postsRes, sloganRes] = await Promise.all([
+        api.get(`/posts?limit=${postsLimit}&offset=${(page - 1) * postsLimit}`),
+        api.get("/content/slogan"),
+      ]);
+
+      // 处理 posts 数据
+      const { data: postData, meta } = postsRes.data;
+      setData((prevData) => [...prevData, ...postData]); // 合并数据
+      setHasMore(meta.count > page * postsLimit); // 是否有更多数据
+
+      // 处理 slogan 数据
+      const activeSlogan = sloganRes.data.data.slogan.find((item) => item.show);
+      setSlogan(activeSlogan); // 设置 slogan
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false); // 加载完成
+      isFetching.current = false; // 重置 isFetching
+    }
+  }, [page, hasMore]);
+
+  // 当 page 或 hasMore 改变时执行 fetchData
   useEffect(() => {
-    const fetchData = async () => {
-      if (isFetching.current) return;
-      setLoading(true); // 开始加载
-      isFetching.current = true;
-      try {
-        const res = await api.get(
-          `/posts?limit=${postsLimit}&offset=${(page - 1) * postsLimit}`
-        );
-        const { data, meta } = res.data;
-        setData((prevData) => (prevData ? [...prevData, ...data] : data));
-        setHasMore(meta.count > page * postsLimit);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false); // 加载完成
-        isFetching.current = false;
-      }
-    };
-
     fetchData();
-  }, [page]);
+  }, [fetchData, page]); // 依赖 fetchData 和 page
 
+  // 处理加载更多
   const handleLoadMore = () => {
     if (!loading && hasMore) {
-      setPage(page + 1); // 增加页码，触发新的请求
+      setPage((prevPage) => prevPage + 1); // 增加页码
     }
   };
 
   return (
-    <div className="max-w-screen-md border-l pl-6">
-      {data ? (
-        <div className="space-y-4">
+    <div className="max-w-screen-md">
+      {/* 如果 slogan 存在，显示 slogan */}
+      {slogan && <div className="mb-20">{slogan.title}</div>}
+
+      {/* 如果数据为空且正在加载，则显示 loading */}
+      {loading && !data.length ? (
+        <div className="flex justify-center items-center h-40">
+          <Loader className="animate-spin w-12 h-12 text-zinc-600 dark:text-zinc-400" />
+        </div>
+      ) : (
+        <div className="space-y-4 border-l border-zinc-100 dark:border-zinc-700/40 pl-6">
+          {/* 筛选掉 slug 为 "about" 的数据 */}
           {data
             .filter((i) => i.slug !== "about")
             .map((post) => (
@@ -70,7 +93,8 @@ const Home = () => {
                 </div>
               </div>
             ))}
-          {/* 只在没有加载时才显示加载按钮 */}
+
+          {/* 只在没有加载时才显示加载更多按钮 */}
           {hasMore && !loading && (
             <div className="flex justify-center mt-8">
               <button
@@ -81,16 +105,13 @@ const Home = () => {
               </button>
             </div>
           )}
-          {/* 在加载时，显示 loading icon 而不显示按钮 */}
+
+          {/* 在加载时显示 loading icon */}
           {loading && (
             <div className="flex justify-center items-center mt-8">
               <Loader className="animate-spin w-8 h-8 text-zinc-600 dark:text-zinc-400" />
             </div>
           )}
-        </div>
-      ) : (
-        <div className="flex justify-center items-center h-40">
-          <Loader className="animate-spin w-12 h-12 text-zinc-600 dark:text-zinc-400" />
         </div>
       )}
     </div>

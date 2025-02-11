@@ -26,14 +26,20 @@ const Detail = () => {
   return (
     <div className="max-w-screen-md m-auto relative">
       <Button
-        variant="ghost"
-        className="absolute -top-12 left-0 sm:top-0 sm:-left-32"
+        variant="outline"
+        size="icon"
+        className="absolute -top-16 left-0 sm:-top-2 sm:-left-32 rounded-full text-zinc-500"
         onClick={() => navigate(-1)}
       >
         <ArrowLeft />
       </Button>
+
       {post.title ? (
         <div>
+          <div className="text-zinc-400 text-sm mb-6 flex items-center">
+            <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500 mr-3"></span>
+            {new Date(post.updated).toLocaleString()}
+          </div>
           <h1 className="text-4xl font-medium mb-8 text-zinc-800 dark:text-zinc-100">
             {post.title}
           </h1>
