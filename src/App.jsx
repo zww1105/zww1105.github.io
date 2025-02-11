@@ -56,7 +56,7 @@ const AppContent = () => {
           </Routes>
         </div>
       </div>
-      <div className="absolute bottom-0 right-0 mb-4 mr-4">
+      <div className="fixed bottom-0 right-0 mb-4 mr-4">
         <a href="https://buttercms.com">
           <img
             width={120}
