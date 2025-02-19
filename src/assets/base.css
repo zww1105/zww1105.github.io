@@ -1,10 +1,17 @@
 :root {
-  --x-body-bg: #f3f5f8;
-  --x-body-color: rgb(55 65 81);
+  --background-color-light: #f3f3f3;
+  --background-color-dark: #191a1a;
+  --color-light: #e1e1e1;
+  --color-dark: rgba(114, 114, 114, 0.3);
 
   /*Font Color*/
   --x-font-color-first: #303133;
   --x-font-color-second: #606266;
   --x-font-color-third: #909399;
   --x-font-color-fourth: #c0c4cc;
+}
+
+.dark {
+  --background-color: var(--background-color-dark);
+  --color: var(--color-dark);
 }

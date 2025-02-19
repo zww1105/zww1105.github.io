@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import api from "../api/request";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, Loader } from "lucide-react";
+import BackButton from "@/components/BackButton";
+import { Loader } from "lucide-react";
 import PostContent from "@/components/PostContent";
 
 const Detail = () => {
@@ -26,14 +26,12 @@ const Detail = () => {
 
   return (
     <div className="max-w-screen-md m-auto relative">
-      <Button
-        variant="outline"
-        size="icon"
-        className="absolute -top-16 left-0 sm:-top-2 sm:-left-32 rounded-full text-zinc-500"
+      <div
+        className="absolute -top-16 left-0 sm:-top-2 sm:-left-32"
         onClick={() => navigate(-1)}
       >
-        <ArrowLeft />
-      </Button>
+        <BackButton></BackButton>
+      </div>
 
       {post.title ? (
         <PostContent post={post} />
