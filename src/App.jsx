@@ -1,16 +1,16 @@
 import { HashRouter as Router, Routes, Route, NavLink } from "react-router-dom";
 import { AppProvider } from "./context/AppContext";
-import { useAppContext } from "./context/useAppContext";
+// import { useAppContext } from "./context/useAppContext";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Detail from "./pages/Detail";
 import NotFound from "./pages/NotFound";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
+// import { Label } from "@/components/ui/label";
+// import { Switch } from "@/components/ui/switch";
 import styled from "styled-components";
 const AppContent = () => {
-  const { theme, toggleTheme } = useAppContext();
+  // const { theme, toggleTheme } = useAppContext();
 
   const routes = [
     { path: "/", name: "Home" },
@@ -38,7 +38,7 @@ const AppContent = () => {
                   </NavLink>
                 ))}
               </nav>
-              <div className="form-control ml-auto">
+              {/* <div className="form-control ml-auto">
                 <div className="flex items-center space-x-2">
                   <Switch
                     id="dark-mode"
@@ -47,7 +47,7 @@ const AppContent = () => {
                   />
                   <Label htmlFor="dark-mode">Dark</Label>
                 </div>
-              </div>
+              </div> */}
             </header>
             <Routes>
               <Route path="/" element={<Home />} />

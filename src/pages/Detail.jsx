@@ -3,7 +3,7 @@ import api from "../api/request";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import BackButton from "@/components/BackButton";
-import { Loader } from "lucide-react";
+import Loader from "@/components/Loader";
 import PostContent from "@/components/PostContent";
 
 const Detail = () => {
@@ -37,7 +37,7 @@ const Detail = () => {
         <PostContent post={post} />
       ) : (
         <div className="flex justify-center items-center h-40">
-          <Loader className="animate-spin w-12 h-12 text-zinc-600 dark:text-zinc-400" />
+          <Loader />
         </div>
       )}
     </div>

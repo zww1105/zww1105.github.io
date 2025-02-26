@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import api from "../api/request";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { ChevronRight, Loader } from "lucide-react";
+import Loader from "@/components/Loader";
+import AwesomeButton from "@/components/AwesomeButton";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -64,7 +64,7 @@ const Home = () => {
       {/* 如果数据为空且正在加载，则显示 loading */}
       {loading && !data.length ? (
         <div className="flex justify-center items-center h-40">
-          <Loader className="animate-spin w-12 h-12 text-zinc-600 dark:text-zinc-400" />
+          <Loader />
         </div>
       ) : (
         <div className="space-y-4 border-l border-zinc-100 dark:border-zinc-700/40 pl-6">
@@ -86,10 +86,9 @@ const Home = () => {
                   <div className="text-zinc-600 dark:text-zinc-400 text-sm mt-2">
                     {post.summary}
                   </div>
-                  <Button variant="link" className="pl-0 mt-8">
-                    Detail
-                    <ChevronRight />
-                  </Button>
+                  <div className="flex justify-end mt-8">
+                    <AwesomeButton>Detail</AwesomeButton>
+                  </div>
                 </div>
               </div>
             ))}
@@ -109,7 +108,7 @@ const Home = () => {
           {/* 在加载时显示 loading icon */}
           {loading && (
             <div className="flex justify-center items-center mt-8">
-              <Loader className="animate-spin w-8 h-8 text-zinc-600 dark:text-zinc-400" />
+              <Loader />
             </div>
           )}
         </div>
