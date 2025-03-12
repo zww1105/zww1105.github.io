@@ -9,6 +9,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 // import { Label } from "@/components/ui/label";
 // import { Switch } from "@/components/ui/switch";
 import styled from "styled-components";
+
 const AppContent = () => {
   // const { theme, toggleTheme } = useAppContext();
 
@@ -21,16 +22,16 @@ const AppContent = () => {
     <StyledWrapper>
       <div className="my-container font-extralight">
         <div className="p-4 max-w-screen-xl bg-background text-foreground m-auto min-h-screen dark:bg-zinc-900 ring-1 ring-zinc-100 dark:ring-zinc-300/20">
-          <div className="max-w-screen-lg m-auto pb-20">
-            <header className="flex mb-24">
-              <nav className="rounded-lg flex gap-4 items-center flex-1">
+          <div className="max-w-screen-md m-auto pb-20">
+            <header className="flex mb-24 gap-4">
+              <nav className="rounded-lg flex gap-4 items-center">
                 {routes.map((i) => (
                   <NavLink
                     key={i.path}
                     to={i.path}
                     className={({ isActive }) =>
-                      `text-sm px-4 py-1 rounded-full font-medium text-muted-foreground transition-colors hover:text-primary ${
-                        isActive ? "text-primary bg-muted" : ""
+                      `text-sm rounded-full font-medium text-zinc-800 transition-colors hover:text-pink-500 ${
+                        isActive ? "text-pink-500" : ""
                       }`
                     }
                   >

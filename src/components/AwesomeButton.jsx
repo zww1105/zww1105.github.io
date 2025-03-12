@@ -65,7 +65,7 @@ const StyledWrapper = styled.div`
   button.more .circle .icon.arrow::before {
     position: absolute;
     content: "";
-    top: -0.29rem;
+    top: -0.25rem;
     right: 0.0625rem;
     width: 0.625rem;
     height: 0.625rem;

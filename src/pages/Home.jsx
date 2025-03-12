@@ -3,6 +3,7 @@ import api from "../api/request";
 import { useNavigate } from "react-router-dom";
 import Loader from "@/components/Loader";
 import AwesomeButton from "@/components/AwesomeButton";
+import Avatar from "../assets/avatar.jpg";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -57,9 +58,16 @@ const Home = () => {
   };
 
   return (
-    <div className="max-w-screen-md">
-      {/* 如果 slogan 存在，显示 slogan */}
-      {slogan && <div className="mb-20">{slogan.title}</div>}
+    <div className="max-w-screen-md m-auto">
+      <div className="flex flex-col gap-8 items-center justify-center mb-8">
+        <img
+          src={Avatar}
+          className="inline-block size-32 rounded-full"
+          alt=""
+        />
+        {/* 如果 slogan 存在，显示 slogan */}
+        {slogan && <div className="mb-20">{slogan.title}</div>}
+      </div>
 
       {/* 如果数据为空且正在加载，则显示 loading */}
       {loading && !data.length ? (
@@ -67,19 +75,20 @@ const Home = () => {
           <Loader />
         </div>
       ) : (
-        <div className="space-y-4 border-l border-zinc-100 dark:border-zinc-700/40 pl-6">
+        <div className="space-y-4 dark:border-zinc-700/40">
           {/* 筛选掉 slug 为 "about" 的数据 */}
           {data
             .filter((i) => i.slug !== "about")
             .map((post) => (
               <div key={post.slug} className="gap-8">
-                <div className="text-zinc-400 text-sm pl-8 mb-4">
-                  {new Date(post.updated).toLocaleDateString()}
-                </div>
                 <div
                   className="hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50 cursor-pointer rounded-2xl transition p-8"
                   onClick={() => navigate(`/detail/${post.slug}`)}
                 >
+                  <div className="text-zinc-400 text-sm flex mb-4">
+                    <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500 mr-3"></span>
+                    {new Date(post.updated).toLocaleDateString()}
+                  </div>
                   <h3 className="text-zinc-800 dark:text-zinc-100 text-base font-medium">
                     {post.title}
                   </h3>
