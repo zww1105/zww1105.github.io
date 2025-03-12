@@ -87,7 +87,7 @@ const Home = () => {
                     {post.summary}
                   </div>
                   <div className="flex justify-end mt-8">
-                    <AwesomeButton>Detail</AwesomeButton>
+                    <AwesomeButton>瞅一眼</AwesomeButton>
                   </div>
                 </div>
               </div>

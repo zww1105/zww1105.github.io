@@ -13,8 +13,8 @@ const AppContent = () => {
   // const { theme, toggleTheme } = useAppContext();
 
   const routes = [
-    { path: "/", name: "Home" },
-    { path: "/about", name: "About" },
+    { path: "/", name: "Wan的日记" },
+    { path: "/about", name: "关于Wan" },
   ];
 
   return (
@@ -85,34 +85,14 @@ const App = () => {
 
 const StyledWrapper = styled.div`
   .my-container {
+    --bg: radial-gradient(#000 5%, #0000 6%);
+    --size: 3rem;
     width: 100%;
     height: 100%;
-    background-color: var(--background-color, var(--background-color-light));
-    background-image: linear-gradient(
-        0deg,
-        transparent 24%,
-        var(--color, var(--color-light)) 25%,
-        var(--color, var(--color-light)) 26%,
-        transparent 27%,
-        transparent 74%,
-        var(--color, var(--color-light)) 75%,
-        var(--color, var(--color-light)) 76%,
-        transparent 77%,
-        transparent
-      ),
-      linear-gradient(
-        90deg,
-        transparent 24%,
-        var(--color, var(--color-light)) 25%,
-        var(--color, var(--color-light)) 26%,
-        transparent 27%,
-        transparent 74%,
-        var(--color, var(--color-light)) 75%,
-        var(--color, var(--color-light)) 76%,
-        transparent 77%,
-        transparent
-      );
-    background-size: 55px 55px;
+    background-color: #fafafa;
+    background-image: var(--bg), var(--bg);
+    background-position: 0 0, calc(var(--size) / 2) calc(var(--size) / 2);
+    background-size: var(--size) var(--size);
   }
 `;
 

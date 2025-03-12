@@ -4,59 +4,103 @@ import styled from "styled-components";
 const Button = ({ children }) => {
   return (
     <StyledWrapper>
-      <button data-text="Awesome" className="button">
-        <span className="actual-text">&nbsp;{children}&nbsp;</span>
-        <span className="hover-text" aria-hidden="true">
-          &nbsp;{children}&nbsp;
+      <button className="more">
+        <span className="circle" aria-hidden="true">
+          <span className="icon arrow" />
         </span>
+        <span className="button-text">{children}</span>
       </button>
     </StyledWrapper>
   );
 };
 
 const StyledWrapper = styled.div`
-  /* === removing default button style ===*/
-  .button {
-    margin: 0;
-    height: auto;
+  button {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
     background: transparent;
     padding: 0;
-    border: none;
-    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
   }
 
-  /* button styling */
-  .button {
-    --border-right: 6px;
-    --text-stroke-color: #00000050;
-    --animation-color: #ec4899;
-    --fs-size: 1em;
-    letter-spacing: 3px;
-    text-decoration: none;
-    font-size: var(--fs-size);
-    font-family: "Arial";
+  button.more {
+    width: 8rem;
+    height: auto;
+  }
+
+  button.more .circle {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
     position: relative;
-    text-transform: uppercase;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--text-stroke-color);
+    display: block;
+    margin: 0;
+    width: 2rem;
+    height: 2rem;
+    background: #ec4899;
+    border-radius: 1.625rem;
   }
-  /* this is the text, when you hover on button */
-  .hover-text {
+
+  button.more .circle .icon {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
     position: absolute;
-    box-sizing: border-box;
-    content: attr(data-text);
-    color: var(--animation-color);
-    width: 0%;
-    inset: 0;
-    border-right: var(--border-right) solid var(--animation-color);
-    overflow: hidden;
-    transition: 0.5s;
-    -webkit-text-stroke: 1px var(--animation-color);
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #fff;
   }
-  /* hover */
-  .button:hover .hover-text {
+
+  button.more .circle .icon.arrow {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    left: 0.225rem;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+  }
+
+  button.more .circle .icon.arrow::before {
+    position: absolute;
+    content: "";
+    top: -0.29rem;
+    right: 0.0625rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-top: 0.125rem solid #fff;
+    border-right: 0.125rem solid #fff;
+    transform: rotate(45deg);
+  }
+
+  button.more .button-text {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.25rem 0;
+    margin: 0 0 0 1.85rem;
+    color: #ec4899;
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  button:hover .circle {
     width: 100%;
-    filter: drop-shadow(0 0 23px var(--animation-color));
+  }
+
+  button:hover .circle .icon.arrow {
+    background: #fff;
+    transform: translate(1rem, 0);
+  }
+
+  button:hover .button-text {
+    color: #fff;
   }
 `;
 
