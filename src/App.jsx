@@ -24,13 +24,13 @@ const AppContent = () => {
         <div className="p-4 max-w-screen-xl bg-background text-foreground m-auto min-h-screen dark:bg-zinc-900 ring-1 ring-zinc-100 dark:ring-zinc-300/20">
           <div className="max-w-screen-md m-auto pb-20">
             <header className="flex mb-24 gap-4">
-              <nav className="rounded-lg flex gap-4 items-center">
+              <nav className="rounded-lg flex gap-4 items-center text-zinc-800">
                 {routes.map((i) => (
                   <NavLink
                     key={i.path}
                     to={i.path}
                     className={({ isActive }) =>
-                      `text-sm rounded-full font-medium text-zinc-800 transition-colors hover:text-pink-500 ${
+                      `text-sm rounded-full font-medium  transition-colors hover:text-pink-500 ${
                         isActive ? "text-pink-500" : ""
                       }`
                     }
