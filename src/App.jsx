@@ -1,4 +1,4 @@
-import { HashRouter as Router, Routes, Route, NavLink } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { AppProvider } from "./context/AppContext";
 // import { useAppContext } from "./context/useAppContext";
 import Home from "./pages/Home";
@@ -13,17 +13,17 @@ import styled from "styled-components";
 const AppContent = () => {
   // const { theme, toggleTheme } = useAppContext();
 
-  const routes = [
-    { path: "/", name: "Wan的日记" },
-    { path: "/about", name: "关于Wan" },
-  ];
+  // const routes = [
+  //   { path: "/", name: "Wan的日记" },
+  //   { path: "/about", name: "关于Wan" },
+  // ];
 
   return (
     <StyledWrapper>
-      <div className="my-container font-extralight">
+      <div className="my-container font-extralight font-mono">
         <div className="p-4 max-w-screen-xl bg-background text-foreground m-auto min-h-screen dark:bg-zinc-900 ring-1 ring-zinc-100 dark:ring-zinc-300/20">
-          <div className="max-w-screen-md m-auto pb-20">
-            <header className="flex mb-24 gap-4">
+          <div className="max-w-screen-md m-auto py-20">
+            {/* <header className="flex mb-24 gap-4">
               <nav className="rounded-lg flex gap-4 items-center text-zinc-800">
                 {routes.map((i) => (
                   <NavLink
@@ -39,17 +39,7 @@ const AppContent = () => {
                   </NavLink>
                 ))}
               </nav>
-              {/* <div className="form-control ml-auto">
-                <div className="flex items-center space-x-2">
-                  <Switch
-                    id="dark-mode"
-                    checked={theme === "dark"}
-                    onCheckedChange={toggleTheme}
-                  />
-                  <Label htmlFor="dark-mode">Dark</Label>
-                </div>
-              </div> */}
-            </header>
+            </header> */}
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />

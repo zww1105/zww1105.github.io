@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from "react";
+import { NavLink } from "react-router-dom";
 import api from "../api/request";
 import { useNavigate } from "react-router-dom";
 import Loader from "@/components/Loader";
@@ -60,11 +61,16 @@ const Home = () => {
   return (
     <div className="max-w-screen-md m-auto">
       <div className="flex flex-col gap-8 items-center justify-center mb-8">
-        <img
-          src={Avatar}
-          className="inline-block size-32 rounded-full"
-          alt=""
-        />
+        <NavLink
+          to="/about"
+          className="hover:shadow-lg rounded-full transition-al duration-300 hover:scale-110 hover:shadow-zinc-400"
+        >
+          <img
+            src={Avatar}
+            className="inline-block size-32 rounded-full"
+            alt=""
+          />
+        </NavLink>
         {/* 如果 slogan 存在，显示 slogan */}
         {slogan && <div className="mb-20">{slogan.title}</div>}
       </div>
