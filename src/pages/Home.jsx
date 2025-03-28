@@ -61,10 +61,7 @@ const Home = () => {
   return (
     <div className="max-w-screen-md m-auto">
       <div className="flex flex-col gap-8 items-center justify-center mb-8">
-        <NavLink
-          to="/about"
-          className="hover:shadow-lg rounded-full transition-al duration-300 hover:scale-110 hover:shadow-zinc-400"
-        >
+        <NavLink to="/about" className="rounded-full">
           <img
             src={Avatar}
             className="inline-block size-32 rounded-full"
@@ -102,7 +99,7 @@ const Home = () => {
                     {post.summary}
                   </div>
                   <div className="flex justify-end mt-8">
-                    <AwesomeButton>瞅一眼</AwesomeButton>
+                    <AwesomeButton>详情</AwesomeButton>
                   </div>
                 </div>
               </div>
