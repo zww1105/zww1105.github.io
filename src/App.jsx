@@ -20,7 +20,7 @@ const AppContent = () => {
 
   return (
     <StyledWrapper>
-      <div className="my-container font-extralight font-mono">
+      <div className="my-container">
         <div className="p-4 max-w-screen-xl bg-background text-foreground m-auto min-h-screen dark:bg-zinc-900 ring-1 ring-zinc-100 dark:ring-zinc-300/20">
           <div className="max-w-screen-md m-auto py-20">
             {/* <header className="flex mb-24 gap-4">
