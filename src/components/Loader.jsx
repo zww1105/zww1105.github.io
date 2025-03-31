@@ -3,74 +3,297 @@ import styled from "styled-components";
 const Loader = () => {
   return (
     <StyledWrapper>
-      <div className="loader" />
+      <div>
+        <svg className="loader" viewBox="0 0 48 30" width="48px" height="30px">
+          <g
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1}
+          >
+            <g transform="translate(9.5,19)">
+              <circle
+                className="loader_tire"
+                r={9}
+                strokeDasharray="56.549 56.549"
+              />
+              <g
+                className="loader_spokes-spin"
+                strokeDasharray="31.416 31.416"
+                strokeDashoffset="-23.562"
+              >
+                <circle className="loader_spokes" r={5} />
+                <circle
+                  className="loader_spokes"
+                  r={5}
+                  transform="rotate(180,0,0)"
+                />
+              </g>
+            </g>
+            <g transform="translate(24,19)">
+              <g
+                className="loader_pedals-spin"
+                strokeDasharray="25.133 25.133"
+                strokeDashoffset="-21.991"
+                transform="rotate(67.5,0,0)"
+              >
+                <circle className="loader_pedals" r={4} />
+                <circle
+                  className="loader_pedals"
+                  r={4}
+                  transform="rotate(180,0,0)"
+                />
+              </g>
+            </g>
+            <g transform="translate(38.5,19)">
+              <circle
+                className="loader_tire"
+                r={9}
+                strokeDasharray="56.549 56.549"
+              />
+              <g
+                className="loader_spokes-spin"
+                strokeDasharray="31.416 31.416"
+                strokeDashoffset="-23.562"
+              >
+                <circle className="loader_spokes" r={5} />
+                <circle
+                  className="loader_spokes"
+                  r={5}
+                  transform="rotate(180,0,0)"
+                />
+              </g>
+            </g>
+            <polyline
+              className="loader_seat"
+              points="14 3,18 3"
+              strokeDasharray="5 5"
+            />
+            <polyline
+              className="loader_body"
+              points="16 3,24 19,9.5 19,18 8,34 7,24 19"
+              strokeDasharray="79 79"
+            />
+            <path
+              className="loader_handlebars"
+              d="m30,2h6s1,0,1,1-1,1-1,1"
+              strokeDasharray="10 10"
+            />
+            <polyline
+              className="loader_front"
+              points="32.5 2,38.5 19"
+              strokeDasharray="19 19"
+            />
+          </g>
+        </svg>
+      </div>
     </StyledWrapper>
   );
 };
 
 const StyledWrapper = styled.div`
   .loader {
-    width: 48px;
-    height: 48px;
-    margin: auto;
-    position: relative;
+    display: block;
+    width: 150px;
+    height: auto;
   }
 
-  .loader:before {
-    content: "";
-    width: 48px;
-    height: 5px;
-    background: #ec489950;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    border-radius: 50%;
-    animation: shadow324 0.5s linear infinite;
+  .loader_body,
+  .loader_front,
+  .loader_handlebars,
+  .loader_pedals,
+  .loader_pedals-spin,
+  .loader_seat,
+  .loader_spokes,
+  .loader_spokes-spin,
+  .loader_tire {
+    animation: bikeBody 1.5s ease-in-out infinite;
+    stroke: #ec4899;
+    transition: stroke var(--trans-dur);
   }
 
-  .loader:after {
-    content: "";
-    width: 100%;
-    height: 100%;
-    background: #ec4899;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 4px;
-    animation: jump7456 0.5s linear infinite;
+  .loader_front {
+    animation-name: bikeFront;
   }
 
-  @keyframes jump7456 {
-    15% {
-      border-bottom-right-radius: 3px;
-    }
+  .loader_handlebars {
+    animation-name: bikeHandlebars;
+  }
 
-    25% {
-      transform: translateY(9px) rotate(22.5deg);
-    }
+  .loader_pedals {
+    animation-name: bikePedals;
+  }
 
-    50% {
-      transform: translateY(18px) scale(1, 0.9) rotate(45deg);
-      border-bottom-right-radius: 40px;
-    }
+  .loader_pedals-spin {
+    animation-name: bikePedalsSpin;
+  }
 
-    75% {
-      transform: translateY(9px) rotate(67.5deg);
-    }
+  .loader_seat {
+    animation-name: bikeSeat;
+  }
 
-    100% {
-      transform: translateY(0) rotate(90deg);
+  .loader_spokes,
+  .loader_tire {
+    stroke: #ec4899;
+  }
+
+  .loader_spokes {
+    animation-name: bikeSpokes;
+  }
+
+  .loader_spokes-spin {
+    animation-name: bikeSpokesSpin;
+  }
+
+  .loader_tire {
+    animation-name: bikeTire;
+  }
+
+  /* Dark theme */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: hsl(var(--hue), 90%, 10%);
+      --fg: hsl(var(--hue), 90%, 90%);
     }
   }
 
-  @keyframes shadow324 {
-    0%,
-    100% {
-      transform: scale(1, 1);
+  /* Animations */
+  @keyframes bikeBody {
+    from {
+      stroke-dashoffset: 79;
     }
 
-    50% {
-      transform: scale(1.2, 1);
+    33%,
+    67% {
+      stroke-dashoffset: 0;
+    }
+
+    to {
+      stroke-dashoffset: -79;
+    }
+  }
+
+  @keyframes bikeFront {
+    from {
+      stroke-dashoffset: 19;
+    }
+
+    33%,
+    67% {
+      stroke-dashoffset: 0;
+    }
+
+    to {
+      stroke-dashoffset: -19;
+    }
+  }
+
+  @keyframes bikeHandlebars {
+    from {
+      stroke-dashoffset: 10;
+    }
+
+    33%,
+    67% {
+      stroke-dashoffset: 0;
+    }
+
+    to {
+      stroke-dashoffset: -10;
+    }
+  }
+
+  @keyframes bikePedals {
+    from {
+      animation-timing-function: ease-in;
+      stroke-dashoffset: -25.133;
+    }
+
+    33%,
+    67% {
+      animation-timing-function: ease-out;
+      stroke-dashoffset: -21.991;
+    }
+
+    to {
+      stroke-dashoffset: -25.133;
+    }
+  }
+
+  @keyframes bikePedalsSpin {
+    from {
+      transform: rotate(0.1875turn);
+    }
+
+    to {
+      transform: rotate(3.1875turn);
+    }
+  }
+
+  @keyframes bikeSeat {
+    from {
+      stroke-dashoffset: 5;
+    }
+
+    33%,
+    67% {
+      stroke-dashoffset: 0;
+    }
+
+    to {
+      stroke-dashoffset: -5;
+    }
+  }
+
+  @keyframes bikeSpokes {
+    from {
+      animation-timing-function: ease-in;
+      stroke-dashoffset: -31.416;
+    }
+
+    33%,
+    67% {
+      animation-timing-function: ease-out;
+      stroke-dashoffset: -23.562;
+    }
+
+    to {
+      stroke-dashoffset: -31.416;
+    }
+  }
+
+  @keyframes bikeSpokesSpin {
+    from {
+      transform: rotate(0);
+    }
+
+    to {
+      transform: rotate(3turn);
+    }
+  }
+
+  @keyframes bikeTire {
+    from {
+      animation-timing-function: ease-in;
+      stroke-dashoffset: 56.549;
+      transform: rotate(0);
+    }
+
+    33% {
+      stroke-dashoffset: 0;
+      transform: rotate(0.33turn);
+    }
+
+    67% {
+      animation-timing-function: ease-out;
+      stroke-dashoffset: 0;
+      transform: rotate(0.67turn);
+    }
+
+    to {
+      stroke-dashoffset: -56.549;
+      transform: rotate(1turn);
     }
   }
 `;
