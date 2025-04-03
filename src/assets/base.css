@@ -1,14 +1,4 @@
 :root {
-  --background-color-light: #f3f3f3;
-  --background-color-dark: #191a1a;
-  --color-light: #e1e1e1;
-  --color-dark: rgba(114, 114, 114, 0.3);
-
-  /*Font Color*/
-  --x-font-color-first: #303133;
-  --x-font-color-second: #606266;
-  --x-font-color-third: #909399;
-  --x-font-color-fourth: #c0c4cc;
 }
 
 @font-face {
@@ -23,7 +13,23 @@ body {
   font-weight: 300;
 }
 
-.dark {
-  --background-color: var(--background-color-dark);
-  --color: var(--color-dark);
+/* 修改滚动条整体样式 */
+::-webkit-scrollbar {
+  width: 5px; /* 垂直滚动条的宽度 */
+  height: 5px; /* 水平滚动条的高度 */
+}
+
+/* 滚动条的轨道 */
+::-webkit-scrollbar-track {
+  background: #fafafa; /* 轨道的背景色 */
+}
+
+/* 滚动条的滑块 */
+::-webkit-scrollbar-thumb {
+  background: #d1d5db; /* 滑块的背景色 */
+}
+
+/* 滑块在悬停时的样式 */
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af; /* 悬停时的背景色 */
 }

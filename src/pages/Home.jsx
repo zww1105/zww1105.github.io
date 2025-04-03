@@ -1,39 +1,32 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { NavLink } from "react-router-dom";
 import api from "../api/request";
-import { useNavigate } from "react-router-dom";
 import Loader from "@/components/Loader";
-import AwesomeButton from "@/components/AwesomeButton";
 import Avatar from "../assets/avatar.jpg";
 
 const Home = () => {
-  const navigate = useNavigate();
   const [data, setData] = useState([]); // 直接初始化为空数组
-  const [page, setPage] = useState(1); // 当前页数
   const [loading, setLoading] = useState(false); // 控制加载状态
-  const [hasMore, setHasMore] = useState(true); // 控制是否有更多数据
   const [slogan, setSlogan] = useState(null); // slogan 状态改为 null 以便更好的检查
 
   const isFetching = useRef(false); // 避免重复请求
-  const postsLimit = 10;
 
   // 使用 useCallback 包裹 fetchData
   const fetchData = useCallback(async () => {
-    if (isFetching.current || !hasMore) return; // 防止重复请求
+    if (isFetching.current) return; // 防止重复请求
     setLoading(true); // 设置加载状态
     isFetching.current = true;
 
     try {
       // 并行请求 posts 和 slogan 数据
       const [postsRes, sloganRes] = await Promise.all([
-        api.get(`/posts?limit=${postsLimit}&offset=${(page - 1) * postsLimit}`),
+        api.get("/posts"),
         api.get("/content/slogan"),
       ]);
 
       // 处理 posts 数据
-      const { data: postData, meta } = postsRes.data;
-      setData((prevData) => [...prevData, ...postData]); // 合并数据
-      setHasMore(meta.count > page * postsLimit); // 是否有更多数据
+      const { data: postData } = postsRes.data;
+      setData(postData);
 
       // 处理 slogan 数据
       const activeSlogan = sloganRes.data.data.slogan.find((item) => item.show);
@@ -44,27 +37,22 @@ const Home = () => {
       setLoading(false); // 加载完成
       isFetching.current = false; // 重置 isFetching
     }
-  }, [page, hasMore]);
+  }, []);
 
-  // 当 page 或 hasMore 改变时执行 fetchData
   useEffect(() => {
     fetchData();
-  }, [fetchData, page]); // 依赖 fetchData 和 page
-
-  // 处理加载更多
-  const handleLoadMore = () => {
-    if (!loading && hasMore) {
-      setPage((prevPage) => prevPage + 1); // 增加页码
-    }
-  };
+  }, [fetchData]); // 依赖 fetchData
 
   return (
     <div className="max-w-screen-md m-auto">
       <div className="flex flex-col gap-8 items-center justify-center mb-8">
-        <NavLink to="/about" className="rounded-full">
+        <NavLink
+          to="/about"
+          className="rounded-full border-2 border-transparent transition-all duration-300 hover:border-pink-500 hover:shadow-lg"
+        >
           <img
             src={Avatar}
-            className="inline-block size-32 rounded-full"
+            className="inline-block size-32 rounded-full transition-all duration-300 hover:scale-90"
             alt=""
           />
         </NavLink>
@@ -78,52 +66,27 @@ const Home = () => {
           <Loader />
         </div>
       ) : (
-        <div className="space-y-4 dark:border-zinc-700/40">
-          {/* 筛选掉 slug 为 "about" 的数据 */}
-          {data
-            .filter((i) => i.slug !== "about")
-            .map((post) => (
-              <div key={post.slug} className="gap-8">
-                <div
-                  className="hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50 cursor-pointer rounded-2xl transition p-8"
-                  onClick={() => navigate(`/detail/${post.slug}`)}
-                >
-                  <div className="text-zinc-400 text-sm flex mb-4">
-                    <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500 mr-3"></span>
-                    {new Date(post.updated).toLocaleDateString()}
+        <ul>
+          {data.map((post) => (
+            <li key={post.slug} className="gap-8 border-b">
+              <div className="py-8 space-y-5">
+                <div className="flex items-center">
+                  <div className="text-zinc-400 text-sm w-24">
+                    {new Date(post.published).toLocaleDateString()}
                   </div>
-                  <h3 className="text-zinc-800 dark:text-zinc-100 text-base font-medium">
-                    {post.title}
+                  <h3 className="text-2xl font-normal">
+                    <NavLink
+                      to={`/detail/${post.slug}`}
+                      className="text-zinc-800 hover:text-pink-500 transition-colors duration-300"
+                    >
+                      {post.title}
+                    </NavLink>
                   </h3>
-                  <div className="text-zinc-600 dark:text-zinc-400 text-sm mt-2">
-                    {post.summary}
-                  </div>
-                  <div className="flex justify-end mt-8">
-                    <AwesomeButton>详情</AwesomeButton>
-                  </div>
                 </div>
               </div>
-            ))}
-
-          {/* 只在没有加载时才显示加载更多按钮 */}
-          {hasMore && !loading && (
-            <div className="flex justify-center mt-8">
-              <button
-                onClick={handleLoadMore}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg"
-              >
-                Load More
-              </button>
-            </div>
-          )}
-
-          {/* 在加载时显示 loading icon */}
-          {loading && (
-            <div className="flex justify-center items-center mt-8">
-              <Loader />
-            </div>
-          )}
-        </div>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );
