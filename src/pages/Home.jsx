@@ -74,7 +74,7 @@ const Home = () => {
                   <div className="text-zinc-400 text-sm w-24">
                     {new Date(post.published).toLocaleDateString()}
                   </div>
-                  <h3 className="text-2xl font-normal">
+                  <h3 className="text-2xl">
                     <NavLink
                       to={`/detail/${post.slug}`}
                       className="text-zinc-800 hover:text-pink-500 transition-colors duration-300"
