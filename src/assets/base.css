@@ -2,13 +2,13 @@
 }
 
 @font-face {
-  font-family: "851";
-  src: url("/fonts/851.ttf") format("truetype");
+  font-family: "MyFont";
+  src: url("/fonts/qingsong2.ttf") format("truetype");
   font-weight: 100 900; /* 可变字体的范围，表示 100 到 900 的字重 */
 }
 
 body {
-  font-family: "851", sans-serif;
+  font-family: "MyFont", sans-serif;
   font-weight: 300;
 }
 
