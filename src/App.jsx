@@ -48,14 +48,40 @@ const App = () => {
 
 const StyledWrapper = styled.div`
   .my-container {
-    --bg: radial-gradient(#000 5%, #0000 6%);
-    --size: 3rem;
     width: 100%;
-    height: 100%;
-    background-color: #fafafa;
-    background-image: var(--bg), var(--bg);
-    background-position: 0 0, calc(var(--size) / 2) calc(var(--size) / 2);
-    background-size: var(--size) var(--size);
+    background: linear-gradient(
+      -45deg,
+      #a3d8f4,
+      /* 淡蓝色 */ #b6f0b6,
+      /* 淡绿色 */ #f8e1a1,
+      /* 淡黄色 */ #f9d3f2,
+      /* 淡紫粉色 */ #fbd0df,
+      /* 浅粉色 */ #d2b3f2,
+      /* 淡紫色 */ #c1e2f7,
+      /* 淡蓝紫色 */ #e6f9d8,
+      /* 浅黄绿色 */ #d8f9f5 /* 淡青色 */
+    );
+    background-size: 500% 500%; /* 调整背景大小，增加变化幅度 */
+    animation: gradient 40s ease-in-out infinite; /* 更长时间的动画过渡，缓慢变化 */
+    height: 200%;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    25% {
+      background-position: 50% 100%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    75% {
+      background-position: 50% 0%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 `;
 
