@@ -20,15 +20,10 @@ body {
 
 /* 滚动条的轨道 */
 ::-webkit-scrollbar-track {
-  background: #fafafa; /* 轨道的背景色 */
+  background: #efefef; /* 轨道的背景色 */
 }
 
 /* 滚动条的滑块 */
 ::-webkit-scrollbar-thumb {
-  background: #d1d5db; /* 滑块的背景色 */
-}
-
-/* 滑块在悬停时的样式 */
-::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af; /* 悬停时的背景色 */
+  background: #ec4899; /* 滑块的背景色 */
 }
