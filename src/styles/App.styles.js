@@ -35,6 +35,6 @@ export const StyledWrapper = styled.div`
     );
     background-size: 500% 500%;
     animation: ${gradientAnimation} 40s ease-in-out infinite;
-    height: 200%;
+    height: 100%;
   }
 `;

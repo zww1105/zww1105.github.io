@@ -3,8 +3,7 @@ import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import api from "../api/request";
 import Loader from "@/components/Loader";
-import Avatar from "../assets/avatar.jpg";
-
+import IMG0 from "../assets/photos/IMG_0.jpg";
 // 将 PostItem 组件抽离出来，使用 memo 优化渲染性能
 const PostItem = memo(({ post }) => (
   <li className="gap-8 border-b">
@@ -47,7 +46,7 @@ const AvatarComponent = memo(({ isHovered, setIsHovered, avatarRef }) => (
     <div className="relative">
       <img
         ref={avatarRef}
-        src={Avatar}
+        src={IMG0}
         className={`
           inline-block size-32 rounded-full
           transition-all duration-500 ease-in-out

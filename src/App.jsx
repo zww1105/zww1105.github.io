@@ -6,6 +6,7 @@ import Loader from "./components/Loader";
 
 // 使用 lazy 加载页面组件
 const Home = lazy(() => import("./pages/Home"));
+const Photo = lazy(() => import("./pages/Photo"));
 const About = lazy(() => import("./pages/About"));
 const Detail = lazy(() => import("./pages/Detail"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -20,22 +21,28 @@ import { StyledWrapper } from "./styles/App.styles";
 
 const AppContent = () => {
   return (
-    <StyledWrapper>
-      <div className="my-container">
-        <Layout>
-          <Suspense fallback={<Loader />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/detail/:id" element={<Detail />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </Layout>
-        <ButterCMSLogo />
-      </div>
-      <BackToTop />
-    </StyledWrapper>
+    <Routes>
+      <Route path="/" element={<Photo />} />
+      <Route
+        path="/*"
+        element={
+          <StyledWrapper>
+            <div className="my-container">
+              <Layout>
+                <Routes>
+                  <Route path="/home" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/detail/:id" element={<Detail />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+                <ButterCMSLogo />
+              </Layout>
+            </div>
+            <BackToTop />
+          </StyledWrapper>
+        }
+      />
+    </Routes>
   );
 };
 
@@ -44,7 +51,9 @@ const App = () => {
     <ErrorBoundary>
       <AppProvider>
         <Router>
-          <AppContent />
+          <Suspense fallback={<Loader />}>
+            <AppContent />
+          </Suspense>
         </Router>
       </AppProvider>
     </ErrorBoundary>
