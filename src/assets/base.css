@@ -11,19 +11,3 @@ body {
   font-family: "MyFont", sans-serif;
   font-weight: 300;
 }
-
-/* 修改滚动条整体样式 */
-::-webkit-scrollbar {
-  width: 5px; /* 垂直滚动条的宽度 */
-  height: 5px; /* 水平滚动条的高度 */
-}
-
-/* 滚动条的轨道 */
-::-webkit-scrollbar-track {
-  background: transparent; /* 轨道的背景色 */
-}
-
-/* 滚动条的滑块 */
-::-webkit-scrollbar-thumb {
-  background: #ec4899; /* 滑块的背景色 */
-}
